@@ -46,7 +46,7 @@ typedef struct filestat {
   uint8_t  folder;
   uint8_t  slot;
   uint16_t id;
-  uint16_t size;
+  uint32_t size;
   uint8_t  month;
   uint8_t  day;
   uint8_t  year;  /* year = 2000 + filestat.year */

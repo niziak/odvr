@@ -7,11 +7,18 @@ support USB Mass Storage. Not all formats are directly supported
 capabilities are implemented.
 
 
+Dependencies
+============
+    For debian-like systems:
+
+sudo apt-get install libusb-dev
+
 Building
 ========
-
   There is no configure script at this time. Libusb and libsndfile,
 and their associated development headers, are required. To build, run:
+
+
 
 $ make odvr
 

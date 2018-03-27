@@ -550,17 +550,22 @@ static int get_folder_metadata(odvr h, uint8_t folder){
     if(cmd_check(h))
       return -45;
 
+//    trace_hexdump("packet", packet, 64);
+
     /* last packet had our size */
-    h->metadata[fidx][sidx]->size = *((uint16_t *)(packet + 40));
+    h->metadata[fidx][sidx]->size = *((uint32_t *)(packet + 39));
+    h->metadata[fidx][sidx]->size >>=8;
+    h->metadata[fidx][sidx]->size &= 0x00FFFFFF;
+    printf("[%08X]\n", h->metadata[fidx][sidx]->size);
   }
 
   return 0;
 }
 
-/* I don't know what the units are to the size paramter are yet, so we fudge
+/* I don't know what the units are to the size parameter are yet, so we fudge
  * this a little. */
 float odvr_length(filestat_t *stat){
-  float divisor[] = { 15.74, 8.56, 23.73, 0, 0, 6.03, 2.03, 12.03, 24.16 };
+  float divisor[] = { 15.74, 8.56, 23.73, 0, 0, 6.03, 2.03, 11.94, 24.15 };
 
   if(stat->quality >= sizeof(divisor)/sizeof(divisor[0]))
       return 0;
